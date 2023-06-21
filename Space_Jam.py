@@ -21,6 +21,8 @@ imagen_menu = pygame.transform.scale(imagen_menu, (ancho_ventana, alto_ventana))
 imagen_ranking = pygame.image.load("fondo_ranking.jpg").convert_alpha()
 imagen_ranking = pygame.transform.scale(imagen_ranking, (ancho_ventana,alto_ventana)) 
 
+#aca
+
 #colores que usare para los botones de texto
 RED = (61, 145, 64)
 BANANA = (227, 207, 87)
