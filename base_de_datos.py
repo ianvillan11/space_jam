@@ -1,7 +1,7 @@
 import sqlite3
 
 def crear_tabla_puntuaciones():
-    with sqlite3.connect("bd_btf.db") as conexion:
+    with sqlite3.connect("puntajes") as conexion:
         try:
             sentencia = ''' 
             create table puntuaciones 
@@ -19,7 +19,7 @@ def crear_tabla_puntuaciones():
             print("Error al crear la tabla")
  
 def leer_tabla_puntuaciones():
-    with sqlite3.connect("bd_btf.db") as conexion:
+    with sqlite3.connect("puntajes") as conexion:
 
         cursor = conexion.execute("SELECT nombre, puntuacion from \
                 puntuaciones ORDER BY puntuacion DESC LIMIT 10")
@@ -28,7 +28,7 @@ def leer_tabla_puntuaciones():
     return resultados
 
 def modificar_tabla_puntuaciones(nombre_ingresado,puntaje):
-    with sqlite3.connect("bd_btf.db") as conexion:
+    with sqlite3.connect("puntajes") as conexion:
 
         try:
             conexion.execute("insert into puntuaciones (nombre, puntuacion)\

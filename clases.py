@@ -2,11 +2,11 @@ import pygame
 import random
 from constantes import *
 
-
+pygame.mixer.init()
 
 class Jugador:
     def __init__(self):
-        self.imagen = pygame.image.load("juego/navecitaaaaaaa.png")
+        self.imagen = pygame.image.load("navecitaaaaaaa.png")
         self.rect = self.imagen.get_rect()
         self.rect.y = 600
         self.rect.x = 240
@@ -29,7 +29,7 @@ class Jugador:
 
 class Enemigos:
     def __init__(self):
-        self.imagen = pygame.image.load(r"juego/arcade.enemies.final.png").convert_alpha()
+        self.imagen = pygame.image.load("arcade.enemies.final.png").convert_alpha()
         self.rect = self.imagen.get_rect()
         self.rect.x = random.randrange(ancho_ventana - self.rect.width)
         self.rect.y = random.randrange(-50, -40)
@@ -58,7 +58,6 @@ class Enemigos:
         self.rect.x = random.randrange(ancho_ventana - self.rect.width)
         self.rect.y = random.randrange(-100, -40)
         self.speedy = random.randrange(1, 10)
-        self.textos.append((self.rect.centerx, self.rect.centery))
 
     def disparar(self):
         disparo = DisparoEnemigo(self.rect.centerx, self.rect.bottom)
@@ -67,26 +66,21 @@ class Enemigos:
 class Proyectil(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load("juego/02.png").convert_alpha()
+        self.image = pygame.image.load("02.png").convert_alpha()
         self.rect = self.image.get_rect()
-        self.radius = 5
         self.rect.centerx = x
         self.rect.top = y
-        self.speedy = -5
-
+        self.speedy = -10
         
-    
-        
-
     def update(self):
         self.rect.y += self.speedy
         if self.rect.bottom < 0:
-            self.kill()
+            self.kill() #utilizo el .kill para eliminar en pantalla un tipo de sprite(en este caso los enemigos)
 
 class DisparoEnemigo(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.imagen = pygame.image.load("juego/01.png").convert_alpha()
+        self.imagen = pygame.image.load("01.png").convert_alpha()
         self.rect = self.imagen.get_rect()
         self.rect.centerx = x
         self.rect.top = y
@@ -95,4 +89,4 @@ class DisparoEnemigo(pygame.sprite.Sprite):
     def update(self):
         self.rect.y += self.speedy
         if self.rect.top > alto_ventana:
-            self.kill()
+            self.kill() #lo mismo de antes pero para eliminar al enemigo

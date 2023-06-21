@@ -16,11 +16,10 @@ pygame.display.set_caption("Space Jam")
 #defino todas las imagenes con sus respectivas escalas de tamañao(que se ajusten al ancho y alto de mi ventana)
 imagen_juego = pygame.image.load("fondo_menuuuu.jpg").convert_alpha()
 imagen_juego = pygame.transform.scale(imagen_juego, (ancho_ventana,alto_ventana)) 
-imagen_menu = pygame.image.load("juego/3lXVAy.png")
+imagen_menu = pygame.image.load("3lXVAy.png")
 imagen_menu = pygame.transform.scale(imagen_menu, (ancho_ventana, alto_ventana))
 imagen_ranking = pygame.image.load("fondo_ranking.jpg").convert_alpha()
 imagen_ranking = pygame.transform.scale(imagen_ranking, (ancho_ventana,alto_ventana)) 
-
 
 #colores que usare para los botones de texto
 RED = (61, 145, 64)
@@ -50,13 +49,11 @@ disparos_enemigos = pygame.sprite.Group()
 #declaro mi variable personaje 1 con mi clase jugador
 personaje1 = Jugador()
 
-
 #declaro la posicion de mis botones
 boton_jugar = pygame.Rect(400, 200, 200, 50)
 boton_salir = pygame.Rect(400, 300, 200, 50)
 boton_ranking = pygame.Rect(400, 400, 200, 50)
 boton_volver_menu = pygame.Rect(400,400,200,50)
-
 
 
 def puntuaciones():
@@ -100,7 +97,7 @@ def mostrar_menu():
     texto_menu = fuente_menu.render("Space Jam", True, (255, 255, 255))
     posicion_texto_menu = texto_menu.get_rect()
 
-    pygame.mixer.music.load("juego/musica_del_juego.mp3") #cargo la musica
+    pygame.mixer.music.load("musica_del_juego.mp3") #cargo la musica
     pygame.mixer.music.play(5) #play recibe como parametro 5 que sera las veces que se reproducira la musica    
 
     
@@ -245,8 +242,6 @@ def mostrar_game_over():
 
         pygame.display.flip() 
 
-
-
 def iniciar_juego():
     global vidas, puntos, enemigos, proyectiles
     vidas = 3
@@ -256,10 +251,8 @@ def iniciar_juego():
     proyectiles.empty()
     disparos_enemigos.empty()
 
-    tiempo_entre_disparos = 2000  # Disparar cada 2 segundos
-    ultimo_disparo = pygame.time.get_ticks()
 
-    pygame.mixer.music.load("juego/musica_del_juego.mp3") #cargo la musica
+    pygame.mixer.music.load("musica_del_juego.mp3") #cargo la musica
     pygame.mixer.music.play(5) #play recibe como parametro 5 que sera las veces que se reproducira la musica
 
 
@@ -273,13 +266,6 @@ def iniciar_juego():
                     proyectil = Proyectil(personaje1.rect.centerx, personaje1.rect.top)
                     proyectiles.add(proyectil)
 
-        tiempo_actual = pygame.time.get_ticks()
-
-        if tiempo_actual - ultimo_disparo > tiempo_entre_disparos:
-            for enemigo in enemigos:
-                enemigo.disparar()
-
-            ultimo_disparo = tiempo_actual
 
         personaje1.movimiento()
 
@@ -289,7 +275,7 @@ def iniciar_juego():
                 enemigo.kill()
 
         if vidas < 1:
-            pygame.mixer.music.load("juego/videogame-death-sound-43894.mp3") #cargo la musica
+            pygame.mixer.music.load("videogame-death-sound-43894.mp3") #cargo la musica
             pygame.mixer.music.play()
             mostrar_game_over()
             font = pygame.font.SysFont(None,100)
@@ -314,9 +300,6 @@ def iniciar_juego():
             if pygame.sprite.spritecollideany(enemigo, proyectiles):
                 enemigo.kill()
                 puntos += 100
-                texto_impacto = fuente.render("+100", True, (255, 255, 255))
-                texto_impacto_rect = texto_impacto.get_rect()
-                pantalla.blit(texto_impacto, texto_impacto_rect)
 
         for disparo in disparos_enemigos:
             disparo.update()
