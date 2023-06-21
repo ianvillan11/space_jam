@@ -36,6 +36,8 @@ texto_ingresado = ""
 #declaro la posicion inicial de mi nave
 posicion_nave = pygame.Rect(40, 300, 0, 0)
 
+
+
 #inicializo la bibloteca integrada para trabajar con fuentes de texto de pygame
 pygame.font.init()
 fuente = pygame.font.SysFont("Arial", 24)
